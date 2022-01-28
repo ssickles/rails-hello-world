@@ -1,0 +1,7 @@
+<h1>Documents host by S3: <%= @bucket_name %></h1>
+<%= @documents %>
+
+<%= form_with multipart: true do |form| %>
+  <%= file_field_tag :document %>
+  <%= form.submit "Upload" %>
+<% end %>
