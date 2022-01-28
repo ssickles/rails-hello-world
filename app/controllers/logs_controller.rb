@@ -38,7 +38,7 @@ class LogsController < ApplicationController
 
   def get_es_client
     Elasticsearch::Client.new(
-      url: ENV['OPENSEARCH_URL']
+      url: ENV['OPENSEARCH_URL'].gsub('https://', '')
     )
   end
 end
