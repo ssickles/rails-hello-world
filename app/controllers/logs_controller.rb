@@ -1,15 +1,14 @@
 class LogsController < ApplicationController
   def index
-    client = get_es_client
-    unless client.indices.exists(index: 'games')
-      client.indices.create(index: 'games')
-    end
-    client.search(
-      index: 'games',
-      body: {
-        query: 'Halo'
-      }
-    )
+    @opensearch_url = ENV['OPENSEARCH_URL']
+    # client = get_es_client
+    # @result = client.cluster.health
+    # @result = client.search(
+    #   index: 'games',
+    #   body: {
+    #     query: 'Halo'
+    #   }
+    # )
   end
 
   def create
@@ -23,16 +22,23 @@ class LogsController < ApplicationController
       { 'id' => 10, 'game_title' => 'Ace Combat 6: Fires of Liberation', 'release_date' => '2007-10-23', 'platform' => 15, 'overview' => "Throughout Ace Combat 6, the player must pilot a fighter jet or other aircraft to destroy foes both in the air and on the ground. As an arcade flight game, it simplifies flight controls and gives the player a large amount of bullets, missiles and other weapons, putting them up against a very large amount of enemy forces. In addition to missiles and a vulcan cannon, the player can equip special weapons such as heat-seeking missiles, bombs, rocket launchers, and others. The player can lock on to a number of foes, and assist different tactical squads by switching between their respective HUD readouts.\r\n\r\nThe game includes 4 default multiplayer modes: Battle Royale, Siege Battle, Team Battle, and Co-Op Battle. In Battle Royale, the basic Deathmatch game mode, up to sixteen players shoot each other down to earn the highest points at the time limit. In Team Battle, a basic Team Deathmatch game is created. Points are awarded based on the type of aircraft destroyed. A unique type of multiplayer game, Siege Battle is played with two teams, Attacking and Defending. The Attacking team attempts to destroy the target (usually heavily defended by flak) within the time limit. The Defending team tries to halt their attack. The co-op battle mode consists of two single-player missions without AI that can be played with up to three other players.", 'youtube' => '', 'players' => 1, 'coop' => 'No', 'rating' => 'T - Teen', 'developers' => [5804], 'genres' => [13], 'publishers' => [6], 'alternates' => nil, 'uids' => nil, 'hashes' => nil },
     ]
     client = get_es_client
+    unless client.indices.exists(index: 'games')
+      client.indices.create(index: 'games')
+    end
     client.bulk(
       body: games.map do |game|
         { index: { _index: 'games', data: game } }
       end
     )
+
+    redirect_to logs_path
   end
 
   private
 
   def get_es_client
-    Elasticsearch::Client.new(hosts: ENV['OPENSEARCH_URL'])
+    Elasticsearch::Client.new(
+      url: ENV['OPENSEARCH_URL']
+    )
   end
 end
