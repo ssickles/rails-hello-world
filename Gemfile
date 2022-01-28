@@ -49,7 +49,7 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 gem "aws-sdk-s3"
-gem "elasticsearch"
+gem "elasticsearch", "< 7.14"
 gem 'faraday_middleware-aws-sigv4'
 gem 'amazing_print'
 
