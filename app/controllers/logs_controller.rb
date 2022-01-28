@@ -1,3 +1,5 @@
+require 'faraday_middleware/aws_sigv4'
+
 class LogsController < ApplicationController
   def index
     @opensearch_url = ENV['OPENSEARCH_URL']
@@ -37,8 +39,12 @@ class LogsController < ApplicationController
   private
 
   def get_es_client
-    Elasticsearch::Client.new(
-      url: ENV['OPENSEARCH_URL']
-    )
+    Elasticsearch::Client.new(url: ENV['OPENSEARCH_URL']) do |f|
+      f.request :aws_sigv4,
+                service: 'es',
+                region: ENV['AWS_REGION'],
+                access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+                secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
+    end
   end
 end

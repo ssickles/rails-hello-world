@@ -50,6 +50,7 @@ gem "bootsnap", require: false
 
 gem "aws-sdk-s3"
 gem "elasticsearch"
+gem 'faraday_middleware-aws-sigv4'
 gem 'amazing_print'
 
 group :development, :test do
