@@ -3,14 +3,22 @@ require 'faraday_middleware/aws_sigv4'
 class LogsController < ApplicationController
   def index
     @opensearch_url = ENV['OPENSEARCH_URL']
-    # client = get_es_client
-    # @result = client.cluster.health
-    # @result = client.search(
-    #   index: 'games',
-    #   body: {
-    #     query: 'Halo'
-    #   }
-    # )
+    client = get_es_client
+    @result = client.cluster.health
+=begin
+    @result = client.search(
+      index: 'games',
+      body: {
+        query: {
+          match: {
+            game_title: {
+              query: 'Halo'
+            }
+          }
+        }
+      }
+    )
+=end
   end
 
   def create
