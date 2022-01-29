@@ -4,8 +4,7 @@ class LogsController < ApplicationController
   def index
     @opensearch_url = ENV['OPENSEARCH_URL']
     client = get_es_client
-    @result = client.cluster.health
-=begin
+    # @result = client.cluster.health
     @result = client.search(
       index: 'games',
       body: {
@@ -18,7 +17,6 @@ class LogsController < ApplicationController
         }
       }
     )
-=end
   end
 
   def create
