@@ -15,6 +15,8 @@ class LogsController < ApplicationController
         }
       }
     )
+  rescue
+    @result = []
   end
 
   def create
