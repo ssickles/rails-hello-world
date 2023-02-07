@@ -5,3 +5,4 @@ apps:
       service_count: 1
     environment:
       TESTING: abc123
+      BLAH: "oh yeah! Brad is amazing!"
