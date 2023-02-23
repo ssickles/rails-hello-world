@@ -1,0 +1,16 @@
+<h1>Jokes stored in our postgres db:</h1>
+
+<table>
+  <tr>
+    <th>Type</th>
+    <th>Setup</th>
+    <th>Punchline</th>
+  </tr>
+  <% @jokes.each do |joke| %>
+    <tr>
+      <td><%= joke.type %></td>
+      <td><%= joke.setup %></td>
+      <td><%= joke.punchline %></td>
+    </tr>
+  <% end %>
+</table>
