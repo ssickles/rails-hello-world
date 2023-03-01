@@ -15,11 +15,12 @@
 # gem "pg"
 #
 default: &default
-  adapter: postgresql
+  adapter: <%= ENV.fetch("DB_ADAPTER") { 'postgresql' } %>
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  url: <%= ENV["DATABASE_URL"] %>
 
 development:
   <<: *default
@@ -81,6 +82,6 @@ test:
 #
 production:
   <<: *default
-  database: rails_hello_world_production
-  username: rails_hello_world
-  password: <%= ENV["RAILS_HELLO_WORLD_DATABASE_PASSWORD"] %>
+  # database: rails_hello_world_production
+  # username: rails_hello_world
+  # password: <%= ENV["RAILS_HELLO_WORLD_DATABASE_PASSWORD"] %>
