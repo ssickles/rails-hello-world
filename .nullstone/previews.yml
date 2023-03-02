@@ -1,6 +1,6 @@
 version: "0.1"
 apps:
-  hello-world:
+  acme-api:
     vars:
       service_count: 1
     environment:
