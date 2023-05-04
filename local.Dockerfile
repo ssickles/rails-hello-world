@@ -10,4 +10,7 @@ COPY . .
 RUN chmod +x local.entrypoint.sh
 ENTRYPOINT ["/local.entrypoint.sh"]
 
+ENV PORT 80
+EXPOSE 80
+
 CMD ["bundle", "exec", "rails", "server"]
