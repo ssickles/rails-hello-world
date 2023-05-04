@@ -1,13 +1,13 @@
-FROM ruby:3.1.0
+FROM nullstone/rails:webapp-ruby3
 
-WORKDIR /root
-COPY local.entrypoint.sh .
-RUN chmod +x ./local.entrypoint.sh
+RUN apk add --no-cache --update \
+    mysql-dev
 
-ENV PORT 80
-ENV RAILS_ENV production
-ENV RAILS_LOG_TO_STDOUT true
-EXPOSE 80
+WORKDIR /
+COPY . .
 
-ENTRYPOINT ["./local.entrypoint.sh"]
+# Set up entrypoint
+RUN chmod +x local.entrypoint.sh
+ENTRYPOINT ["/local.entrypoint.sh"]
+
 CMD ["bundle", "exec", "rails", "server"]
