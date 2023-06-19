@@ -4,4 +4,5 @@ apps:
     vars:
       num_tasks: 1
     environment:
+      TESTING: abc123
       DATABASE_URL: "{{ POSTGRES_URL }}"
