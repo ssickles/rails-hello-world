@@ -4,4 +4,4 @@ apps:
     vars:
       - service_count=1
     environment:
-      - TESTING=abc123
+      - TESTING=abc123456
