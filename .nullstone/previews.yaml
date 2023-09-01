@@ -2,6 +2,6 @@ version: "0.1"
 apps:
   acme-api:
     vars:
-      - service_count=1
+      service_count:1
     environment:
-      - TESTING=abc123456
+      TESTING:abc123456
