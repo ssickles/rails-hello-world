@@ -1,0 +1,57 @@
+version: "0.1"
+apps:
+  acme-api:
+    module: nullstone/aws-fargate-service
+    vars:
+      cpu: 256
+      memory: 512
+      num_tasks: 2
+    connections:
+      cluster-namespace:
+        block_name: namespace0
+    environment:
+      TEST: "abc123"
+    capabilities:
+      - module: nullstone/rails-secret-key
+      - module: nullstone/aws-postgres-access
+        vars:
+          database_name: "acme-api"
+        connections:
+          postgres:
+            block_name: postgres
+      - module: nullstone/aws-load-balancer
+        connections:
+          subdomain:
+            block_name: ns-sub-for-acme-api
+
+subdomains:
+  ns-sub-for-acme-api:
+    module: nullstone/autogen-aws-subdomain
+
+cluster_namespaces:
+  namespace0:
+    module: nullstone/aws-fargate-namespace
+    connections:
+      cluster:
+        block_name: cluster0
+
+clusters:
+  cluster0:
+    module: nullstone/aws-fargate
+    is_shared: true
+    connections:
+      network:
+        block_name: network0
+
+datastores:
+  postgres:
+    module: nullstone/aws-rds-postgres
+    is_shared: true
+    connections:
+      network:
+        block_name: network0
+
+networks:
+  network0:
+    module: nullstone/aws-network
+    is_shared: true

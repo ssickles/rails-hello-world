@@ -2,6 +2,6 @@ version: "0.1"
 apps:
   acme-api:
     vars:
-      - service_count=1
+      num_tasks: 1
     environment:
-      - TESTING=abc123
+      TEST: "def456"
