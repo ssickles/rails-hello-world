@@ -12,7 +12,7 @@ apps:
     environment:
       TEST: "abc123"
     capabilities:
-      - module: nullstone/rails-secret-key
+      - module: nullstone/rails-cookies
       - module: nullstone/aws-postgres-access
         vars:
           database_name: "acme-api"
