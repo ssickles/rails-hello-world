@@ -7,3 +7,4 @@ apps:
       num_tasks: 1
     environment:
       TEST: "def456"
+      ANOTHER_ENV_VAR: "This is exciting!"
