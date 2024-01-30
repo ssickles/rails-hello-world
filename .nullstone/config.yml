@@ -2,6 +2,7 @@ version: "0.1"
 apps:
   acme-api:
     module: nullstone/aws-fargate-service
+    module_version: "0.13.24"
     vars:
       cpu: 256
       memory: 512
