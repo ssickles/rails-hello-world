@@ -1,0 +1,35 @@
+version: "0.1"
+apps:
+  acme-api:
+    module: nullstone/aws-fargate-service
+    module_version: latest
+    vars: {}
+    connections:
+      cluster-namespace:
+        stack_name: primary
+        block_name: namespace0
+    is_shared: false
+    environment:
+      INDEX_TEST: blahblahblah
+      TEST2: ••••••••••
+    capabilities:
+      - module: nullstone/aws-load-balancer
+        module_version: 0.3.5
+        vars:
+          enable_https: true
+          health_check_enabled: true
+          health_check_healthy_threshold: 2
+          health_check_interval: 5
+          health_check_matcher: 200-499
+          health_check_path: /
+          health_check_timeout: 4
+          health_check_unhealthy_threshold: 2
+          sticky_session_cookie_name: STICKY_SESSION
+          sticky_session_duration: 86400
+          sticky_session_type: "off"
+        connections:
+          subdomain:
+            block_name: ns-sub-for-acme-api
+      - module: nullstone/rails-cookies
+        module_version: 0.3.5
+        vars: {}
