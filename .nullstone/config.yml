@@ -3,7 +3,6 @@ apps:
   acme-api:
     module: nullstone/aws-fargate-service
     module_version: latest
-    vars: {}
     connections:
       cluster-namespace:
         stack_name: primary
@@ -32,4 +31,3 @@ apps:
             block_name: ns-sub-for-acme-api
       - module: nullstone/rails-cookies
         module_version: 0.3.5
-        vars: {}
