@@ -6,7 +6,7 @@ apps:
     vars: {}
     connections:
       cluster-namespace:
-        stack_id: 485
+        stack_name: primary
         block_name: namespace0
     is_shared: false
     environment:
