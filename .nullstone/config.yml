@@ -14,7 +14,7 @@ apps:
       TEST2: ••••••••••
     capabilities:
       - module: nullstone/aws-load-balancer
-        module_version: 0.3.5
+        module_version: latest
         vars:
           enable_https: true
           health_check_enabled: true
@@ -31,5 +31,5 @@ apps:
           subdomain:
             block_name: ns-sub-for-acme-api
       - module: nullstone/rails-cookies
-        module_version: 0.3.5
+        module_version: latest
         vars: {}
