@@ -3,10 +3,6 @@ apps:
   acme-api:
     module: nullstone/aws-fargate-service
     module_version: latest
-    connections:
-      cluster-namespace:
-        stack_name: primary
-        block_name: namespace0
     is_shared: false
     environment:
       INDEX_TEST: blahblahblah
