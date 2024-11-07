@@ -5,4 +5,4 @@ apps:
       cpu: 256
       memory: 512
     environment:
-      TESTING: abc123
+      TESTING: abc123456
