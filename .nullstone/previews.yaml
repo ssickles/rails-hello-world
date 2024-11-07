@@ -2,6 +2,8 @@ version: "0.1"
 apps:
   acme-api:
     vars:
-      num_tasks: 1
+      cpu: 256
+      memory: 512
     environment:
-      TESTING: abc123456
+      TESTING: abc123
+      
